@@ -1,0 +1,8 @@
+name: cling
+channels:
+  - QuantStack
+  - conda-forge
+  - defaults
+dependencies:
+  - cling
+  - xeus-cling

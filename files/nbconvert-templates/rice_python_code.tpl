@@ -3,9 +3,7 @@
 {% block header %}
 """
 Rice University
-Gabe Vacaliuc
-
-Assignment Name: {{resources.metadata.name}}
+File Name: {{resources.metadata.name}}
 """
 {% endblock header %}
 

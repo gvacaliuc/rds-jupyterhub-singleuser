@@ -24,22 +24,6 @@
 
 ((* block definitions *))
 
-%% Following obtained from \layout. May need adjustment based on class and
-%% page settings.  Alternatively, can set these to 0pt and then position will
-%% be relative to bottom left of page.
-\newcommand*{\BottomLeftX}{1.0in+\hoffset+\oddsidemargin}%
-\newcommand*{\BottomLeftY}{\paperheight-1.0in-\voffset-\topmargin-\headheight-\headsep-\textheight}%
-
-\newcommand*{\AbsolutePosition}[4][]{%
-    % #1 = tikz options
-    % #2 = x (from south west corner of page
-    % #3 = y
-    % #4 = text
-    \begin{tikzpicture}[remember picture, overlay]
-        \node [#1] at ($(current page.south west) + (\BottomLeftX,\BottomLeftY) + (#2,#3)$) {#4};
-    \end{tikzpicture}%
-}
-
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
 \fancyhead{} % No page header - if you want one, create it in the same way as the footers below
 \fancyfoot[L]{} % Empty left footer
@@ -60,17 +44,18 @@
 
 ((* endblock definitions *))
 
-
-
-
 % Author and Title from metadata
 ((* block maketitle *))
 
-\author{Gabriel Vacaliuc} % Your name
 \date{\normalsize\today} % Today's date or a custom date
 ((* print '\n' *))
 
 ((*- if nb.metadata["latex_metadata"]: -*))
+((*- if nb.metadata["latex_metadata"]["author"]: -*))
+    \author{((( nb.metadata["latex_metadata"]["author"] )))}
+((*- else -*))
+    \author{author}
+((*- endif -*))
 ((*- if nb.metadata["latex_metadata"]["title"]: -*))
 \title{	
     \normalfont \normalsize 
@@ -92,12 +77,7 @@
 
 \maketitle
 
-%   Headshot required for COMP345 Professor
-\AbsolutePosition{2.5cm}{17.5cm}{\Oldincludegraphics[width=3.0cm]{/home/gvacaliuc/Documents/school/sp2017/comp345/headshot}}
-\AbsolutePosition{2.5cm}{15.6cm}{\textbf{Computer Science}}
-
 ((* endblock maketitle *))
 
 ((* block input_group *))((* endblock input_group *))
 ((* block stream *))((* endblock stream *))
-
